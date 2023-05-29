@@ -1,6 +1,5 @@
 <template>
-    <div>Show</div>
-    <Link href="/">Index Page</Link>
+    
 </template>
 
 
