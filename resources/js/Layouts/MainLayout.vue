@@ -2,6 +2,7 @@
     <Link href="/">Index Page</Link>&nbsp;
     <Link href="/hello">Show Page</Link>&nbsp;
     <Link href="/listing">Listings</Link>&nbsp;
+    <Link href="/listing/create">New Listing</Link>&nbsp;
     <!-- <div>The page timer {{ timer}}</div> -->
 
     <div v-if="flashSuccess" class="success">
