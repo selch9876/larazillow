@@ -46,9 +46,9 @@ class ListingController extends Controller
                 'bathrooms' => 'required|integer|min:1|max:20',
                 'area' => 'required|integer|min:15|max:1500',
                 'city' => 'required',
-                'code' => 'required',
+                'postcode' => 'required',
                 'street' => 'required',
-                'street_nr' => 'required|min:1|max:1000',
+                'street_no' => 'required|min:1|max:1000',
                 'price' => 'required|integer|min:1|max:20000000',
             ])
         );
@@ -99,15 +99,31 @@ class ListingController extends Controller
      */
     public function update(Request $request, Listing $listing)
     {
+
+        // try {
+        //     $validatedData = $request->validate([
+        //         'beds' => 'required|integer|min:0|max:20',
+        //         'bathrooms' => 'required|integer|min:1|max:20',
+        //         'area' => 'required|integer|min:15|max:1500',
+        //         'city' => 'required',
+        //         'postcode' => 'required',
+        //         'street' => 'required',
+        //         'street_no' => 'required|min:1|max:1000',
+        //         'price' => 'required|integer|min:1|max:20000000',
+        //     ]);
+        // } catch (\Illuminate\Validation\ValidationException $e) {
+        //     dd($e->errors());
+        // }
+
         $listing->update(
             $request->validate([
                 'beds' => 'required|integer|min:0|max:20',
                 'bathrooms' => 'required|integer|min:1|max:20',
                 'area' => 'required|integer|min:15|max:1500',
                 'city' => 'required',
-                'code' => 'required',
+                'postcode' => 'required',
                 'street' => 'required',
-                'street_nr' => 'required|min:1|max:1000',
+                'street_no' => 'required|min:1|max:1000',
                 'price' => 'required|integer|min:1|max:20000000',
             ])
         );
@@ -122,8 +138,10 @@ class ListingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Listing $listing)
     {
-        //
+        $listing->delete();
+
+        return redirect()->back()->with('success', 'Listing Deleted!');
     }
 }
