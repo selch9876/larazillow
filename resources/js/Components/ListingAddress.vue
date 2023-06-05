@@ -1,6 +1,6 @@
 <template>
     <span>
-        {{ listing.city }} {{ listing.street }} {{ listing.street_no }}, for {{ listing.price }}
+        {{ listing.city }} {{ listing.street }} {{ listing.street_no }}
     </span>
 </template>
 
