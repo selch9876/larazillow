@@ -4,7 +4,15 @@ import MainLayout from './Layouts/MainLayout.vue'
 import {ZiggyVue} from 'ziggy'
 import '../css/app.css'
 
+
 createInertiaApp({
+  progress: {
+    delay: 0,
+    color: '#29',
+    includeCSS: true,
+    showSpinner: true,
+  },
+  
   resolve: name => {
     const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
     let page = pages[`./Pages/${name}.vue`]
