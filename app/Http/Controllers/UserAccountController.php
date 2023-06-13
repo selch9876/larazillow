@@ -16,7 +16,7 @@ class UserAccountController extends Controller
 
     public function store(Request $request)
     {
-        $user = User::make(
+        $user = User::create(
             $request->validate([
                 'name' => 'required|string',
                 'email' => 'required|email|unique:users',
@@ -24,8 +24,10 @@ class UserAccountController extends Controller
             ])
         );
 
-        $user->password = Hash::make($user->password);
-        $user->save();
+        // Accessor ve Mutator koyduğumuz için (User.php) , alttakilere gerek kalmadı ve User'ı doğrudan create yaptık
+        // $user->password = Hash::make($user->password);
+        // $user->save();
+
         Auth::login($user);
 
         return redirect()->route('listing.index')->with('success', 'Account Created');
