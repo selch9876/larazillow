@@ -19,10 +19,21 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+            'is_admin' => true,
         ]);
 
-        \App\Models\Listing::factory(20)->create([
+        \App\Models\User::factory()->create([
+            'name' => 'Test User2',
+            'email' => 'test2@example.com',
+            'is_admin' => false, // Bunu yazmaya gerek yok, default değer verdiğimiz için
+        ]);
+
+        \App\Models\Listing::factory(10)->create([
             'by_user_id' => 1
+        ]);
+
+        \App\Models\Listing::factory(10)->create([
+            'by_user_id' => 2
         ]);
     }
 }
