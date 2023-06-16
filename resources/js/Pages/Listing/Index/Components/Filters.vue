@@ -77,5 +77,6 @@ const clear = () => {
   filterForm.bathrooms = null
   filterForm.areaFrom = null
   filterForm.areaTo = null
+  filter()
 }
 </script>
