@@ -42,6 +42,10 @@ class Listing extends Model
         )->when(
             $filters['deleted'] ?? false,
             fn ($query, $value) => $query->withTrashed()
-        );
+        )->when(
+            $filters['by'] ?? false,
+            fn ($query, $value) => 
+            $query->orderBy($value, $filters['order'] ?? 'desc')
+         );
     }
 }
