@@ -14,6 +14,10 @@ class Listing extends Model
 
     protected $fillable = ['beds', 'bathrooms', 'area', 'city', 'postcode', 'street', 'street_no', 'price'];
 
+    protected $sortable = [
+        'price', 'created_at'
+    ];
+
     public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class, 'by_user_id');
@@ -44,8 +48,11 @@ class Listing extends Model
             fn ($query, $value) => $query->withTrashed()
         )->when(
             $filters['by'] ?? false,
-            fn ($query, $value) => 
-            $query->orderBy($value, $filters['order'] ?? 'desc')
+            fn ($query, $value) =>
+            // If value in the protected sortable array that we created or if not in the array (teranary operator)
+            !in_array($value, $this->sortable) ? 
+            $query : 
+                $query->orderBy($value, $filters['order'] ?? 'desc')
          );
     }
 }
