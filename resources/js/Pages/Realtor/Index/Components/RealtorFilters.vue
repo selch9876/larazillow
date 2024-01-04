@@ -64,6 +64,6 @@ watch(
     route('realtor.listing.index'),
     filterForm,
     {preserveState: true, preserveScroll: true},
-  ), 1000),
+  ), 100), // Bu kısım geciktirme için
 )
 </script>
