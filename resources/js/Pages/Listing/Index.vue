@@ -11,7 +11,7 @@
 
 <script setup>
 import Listing from '@/Pages/Listing/Index/Components/Listing.vue'
-import Pagination from '../../Components/UI/Pagination.vue';
+import Pagination from '@/Components/UI/Pagination.vue';
 import Filters from './Index/Components/Filters.vue';
 defineProps({
     listings: Object,
