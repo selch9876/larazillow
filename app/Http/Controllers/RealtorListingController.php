@@ -34,10 +34,101 @@ class RealtorListingController extends Controller
         );
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return inertia('Realtor/Create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        
+        $request->user()->listings()->create(
+            $request->validate([
+                'beds' => 'required|integer|min:0|max:20',
+                'bathrooms' => 'required|integer|min:1|max:20',
+                'area' => 'required|integer|min:15|max:1500',
+                'city' => 'required',
+                'postcode' => 'required',
+                'street' => 'required',
+                'street_no' => 'required|min:1|max:1000',
+                'price' => 'required|integer|min:1|max:20000000',
+            ])
+        );
+
+
+        return redirect()->route('realtor.listing.index')
+        ->with('success', 'Listing created.');
+    }
+
+    public function edit(Listing $listing)
+    {
+        return inertia(
+            'Realtor/Edit',
+            [
+                'listing' => $listing
+            ]
+        );
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Listing $listing)
+    {
+
+        // try {
+        //     $validatedData = $request->validate([
+        //         'beds' => 'required|integer|min:0|max:20',
+        //         'bathrooms' => 'required|integer|min:1|max:20',
+        //         'area' => 'required|integer|min:15|max:1500',
+        //         'city' => 'required',
+        //         'postcode' => 'required',
+        //         'street' => 'required',
+        //         'street_no' => 'required|min:1|max:1000',
+        //         'price' => 'required|integer|min:1|max:20000000',
+        //     ]);
+        // } catch (\Illuminate\Validation\ValidationException $e) {
+        //     dd($e->errors());
+        // }
+
+        $listing->update(
+            $request->validate([
+                'beds' => 'required|integer|min:0|max:20',
+                'bathrooms' => 'required|integer|min:1|max:20',
+                'area' => 'required|integer|min:15|max:1500',
+                'city' => 'required',
+                'postcode' => 'required',
+                'street' => 'required',
+                'street_no' => 'required|min:1|max:1000',
+                'price' => 'required|integer|min:1|max:20000000',
+            ])
+        );
+
+        return redirect()->route('realtor.listing.index')
+        ->with('success', 'Listing updated.');
+    }
+
     public function destroy(Listing $listing)
     {
         $listing->deleteOrFail();
 
         return redirect()->back()->with('success', 'Listing Deleted!');
     }
+
+    
 }

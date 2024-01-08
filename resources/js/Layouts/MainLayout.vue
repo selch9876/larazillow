@@ -10,7 +10,7 @@
           </div>
           <div class="flex items-center gap-4" v-if="user">
             <Link :href="route('realtor.listing.index')" class="text-gray-500">{{ user.name}}</Link>
-            <Link :href="route('listing.create')" class="btn-primary">+ New Listing</Link>
+            <Link :href="route('realtor.listing.create')" class="btn-primary">+ New Listing</Link>
             <Link :href="route('logout')" as="button" method="delete" class="btn-danger">Logout</Link>
           </div>
           <div v-else class="flex gap-4">

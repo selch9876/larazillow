@@ -23,11 +23,9 @@ Route::get('/', [IndexController::class, 'index'])->name('home');
 Route::get('/hello', [IndexController::class, 'show']);
 
 // Listing routes
+
 Route::resource('listing', ListingController::class)
-  ->only(['create', 'store', 'edit', 'update'])
-  ->middleware('auth');
-Route::resource('listing', ListingController::class)
-  ->except(['create', 'store', 'edit', 'update', 'destroy']);
+  ->only(['index', 'show']);
   
 
 // Auth Routes
@@ -44,5 +42,5 @@ Route::prefix('realtor')
   ->middleware('auth')
   ->group(function () {
     Route::resource('listing', RealtorListingController::class)
-      ->only(['index', 'destroy']);
+      ->only(['index', 'destroy', 'edit', 'update', 'create', 'store']);
   });
