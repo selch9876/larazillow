@@ -21,11 +21,17 @@
                         Preview
                     </a>
                     <Link class="btn-outline text-xs font-medium" :href="route('realtor.listing.edit', { listing: listing.id })">Edit</Link>
-                    <Link class="btn-outline text-xs font-medium" 
+                    <Link v-if="!listing.deleted_at" class="btn-outline text-xs font-medium" 
                         :href="route('realtor.listing.destroy', { listing: listing.id })" 
                         as="button" 
                         method="delete">
                         Delete
+                    </Link>
+                    <Link v-else class="btn-outline text-xs font-medium" 
+                        :href="route('realtor.listing.restore', { listing: listing.id })" 
+                        as="button" 
+                        method="put">
+                        Restore
                     </Link>
                 </div>
             </div>
