@@ -6,7 +6,7 @@ use App\Models\Listing;
 use App\Models\ListingImage;
 use Illuminate\Http\Request;
 
-class RealtorLıstingImageController extends Controller
+class RealtorListingImageController extends Controller
 {
     public function create(Listing $listing)
     {
