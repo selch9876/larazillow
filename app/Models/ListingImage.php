@@ -10,9 +10,16 @@ class ListingImage extends Model
 {
     use HasFactory;
     protected $fillable = ['filename'];
+    protected $appends = ['src'];
 
     public function listing(): BelongsTo
     {
         return $this->belongsTo(Listing::class);
+    }
+
+    // We create a custom attribute (column) named 'src'...
+    public function getSrcAttribute()
+    {
+        return asset("storage/{$this->filename}");
     }
 }
